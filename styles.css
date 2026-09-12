@@ -1,15 +1,11 @@
-```css
-/* ============================================
-   SOFT + FLIRTY THEME
-   ============================================ */
-
+/* CSS Variables - Will be updated by JavaScript */
 :root {
     /* Colors */
-    --background-color-1: #f8d7df;
-    --background-color-2: #f6e6d8;
-    --button-color: #c96f7b;
-    --button-hover: #b95f6c;
-    --text-color: #9d4f5d;
+    --background-color-1: #ffafbd;
+    --background-color-2: #ffc3a0;
+    --button-color: #ff6b6b;
+    --button-hover: #ff8787;
+    --text-color: #ff4757;
 
     /* Animations */
     --float-duration: 15s;
@@ -18,655 +14,305 @@
     --heart-explosion-size: 1.5;
 }
 
-
-/* ============================================
-   PAGE
-   ============================================ */
-
 body {
     margin: 0;
     min-height: 100vh;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
-    background:
-        radial-gradient(circle at top left, rgba(255,255,255,0.7), transparent 35%),
-        linear-gradient(
-            135deg,
-            var(--background-color-1),
-            var(--background-color-2)
-        );
-
-    font-family: 'Poppins', sans-serif;
-
+    background: linear-gradient(135deg, var(--background-color-1), var(--background-color-2));
+    font-family: Arial, sans-serif;
     overflow-x: hidden;
 }
 
-
-/* ============================================
-   MAIN CARD
-   ============================================ */
-
 .container {
-    position: relative;
-    z-index: 10;
-
-    width: min(90%, 560px);
-
-    background: rgba(255, 255, 255, 0.78);
-
-    padding: 45px 35px;
-
-    border-radius: 28px;
-
-    border: 1px solid rgba(255, 255, 255, 0.8);
-
-    box-shadow:
-        0 20px 60px rgba(120, 70, 80, 0.15),
-        0 5px 20px rgba(120, 70, 80, 0.08);
-
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     text-align: center;
-
-    backdrop-filter: blur(12px);
-
-    overflow: visible;
+    max-width: 600px;
+    margin: 20px;
+    overflow: visible !important;
 }
-
-
-/* ============================================
-   HEADINGS
-   ============================================ */
-
-h1 {
-    font-family: 'Dancing Script', cursive;
-
-    font-size: 3rem;
-
-    color: var(--text-color);
-
-    margin: 0 0 25px;
-
-    font-weight: 700;
-}
-
-h2 {
-    font-family: 'Poppins', sans-serif;
-
-    color: #70434b;
-
-    font-size: 1.35rem;
-
-    line-height: 1.7;
-
-    font-weight: 600;
-
-    margin-bottom: 28px;
-}
-
-
-/* ============================================
-   FLOATING BACKGROUND ELEMENTS
-   ============================================ */
 
 .floating-elements {
     position: fixed;
-
     width: 100%;
     height: 100%;
-
-    top: 0;
-    left: 0;
-
     pointer-events: none;
-
     z-index: 1;
-
-    overflow: hidden;
 }
 
-.heart,
-.bear {
+.heart, .bear {
     position: absolute;
-
-    font-size: 1.5rem;
-
-    opacity: 0.45;
-
-    animation:
-        float var(--float-duration)
-        linear
-        infinite;
+    font-size: 2rem;
+    animation: float var(--float-duration) linear infinite;
 }
 
 @keyframes float {
-
     0% {
-        transform:
-            translateY(100vh)
-            translateX(0)
-            rotate(0deg);
-
-        opacity: 0;
+        transform: translateY(100vh) translateX(0);
     }
-
-    15% {
-        opacity: 0.45;
-    }
-
-    85% {
-        opacity: 0.45;
-    }
-
     100% {
-        transform:
-            translateY(-100px)
-            translateX(var(--float-distance))
-            rotate(20deg);
-
-        opacity: 0;
+        transform: translateY(-100px) translateX(var(--float-distance));
     }
 }
-
-
-/* ============================================
-   BUTTONS
-   ============================================ */
 
 .cute-btn {
     background: var(--button-color);
-
     border: none;
-
-    padding: 12px 25px;
-
-    margin: 8px;
-
-    border-radius: 999px;
-
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 20px;
     color: white;
-
-    font-family: 'Poppins', sans-serif;
-
-    font-size: 0.95rem;
-
-    font-weight: 600;
-
+    font-size: 1.1rem;
     cursor: pointer;
-
-    box-shadow:
-        0 6px 15px rgba(150, 70, 80, 0.18);
-
-    transition:
-        transform 0.25s ease,
-        background 0.25s ease,
-        box-shadow 0.25s ease;
+    transition: transform 0.3s, background 0.3s;
 }
 
 .cute-btn:hover {
-    transform: translateY(-3px);
-
+    transform: scale(1.1);
     background: var(--button-hover);
-
-    box-shadow:
-        0 9px 20px rgba(150, 70, 80, 0.25);
 }
-
-.cute-btn:active {
-    transform: scale(0.96);
-}
-
-
-/* YES BUTTON */
-
-#yesBtn1,
-#yesBtn3,
-.final-yes {
-    background: #9f5965;
-}
-
-#yesBtn1:hover,
-#yesBtn3:hover,
-.final-yes:hover {
-    background: #8c4b57;
-}
-
-
-/* NO BUTTON */
-
-#noBtn1,
-#noBtn3 {
-    background: #ddd0d2;
-
-    color: #684f54;
-
-    box-shadow: none;
-}
-
-#noBtn1:hover,
-#noBtn3:hover {
-    background: #d2c2c5;
-}
-
-
-/* ============================================
-   HIDDEN SECTIONS
-   ============================================ */
 
 .hidden {
     display: none;
 }
 
-
-/* ============================================
-   SECRET ANSWER
-   ============================================ */
+.disabled-btn {
+    opacity: 0.7;
+    cursor: not-allowed;
+    pointer-events: none;
+}
 
 .secret-answer {
     position: fixed;
-
     bottom: 20px;
     right: 20px;
-
     margin-top: 0;
-
-    opacity: 0.15;
-
-    transition: opacity 0.3s ease;
-
+    opacity: 0.2;
+    transition: opacity 0.3s;
     transform: scale(0.7);
-
-    z-index: 20;
-
-    animation:
-        subtle-hint
-        2s
-        infinite
-        alternate;
-
+    z-index: 2;
+    animation: subtle-hint 2s infinite alternate;
     animation-delay: 5s;
 }
 
 .secret-answer .cute-btn {
-    font-size: 0.75rem;
-
-    padding: 6px 12px;
+    font-size: 0.8rem;
+    padding: 5px 10px;
 }
 
 .secret-answer:hover {
     opacity: 1;
-
     animation: none;
 }
 
-@keyframes subtle-hint {
-
-    0% {
-        opacity: 0.12;
-    }
-
-    100% {
-        opacity: 0.25;
-    }
-}
-
-
-/* ============================================
-   LOVE METER
-   ============================================ */
-
 .love-meter {
     position: relative;
-
     width: 100%;
-
-    margin: 25px auto;
-
+    margin: 20px auto;
     overflow: visible;
-
     padding: 10px 0;
 }
 
 .love-meter p {
-    font-size: 1rem;
-
-    margin: 18px 0;
-
+    font-size: 1.2em;
+    margin: 15px 0;
     color: var(--text-color);
-
     transition: all 0.3s ease;
-
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     gap: 8px;
 }
 
-
-/* Slider */
-
 .slider {
     width: 100%;
-
-    height: 12px;
-
-    background:
-        linear-gradient(
-            to right,
-            #d48791,
-            #df9ca5,
-            #edd1d4
-        );
-
+    height: 25px;
+    background: linear-gradient(to right, #ff6b6b, #ff8787, #ffb8b8);
     -webkit-appearance: none;
     appearance: none;
-
     outline: none;
-
     position: relative;
-
-    border-radius: 999px;
-
-    box-shadow:
-        0 4px 12px rgba(150, 70, 80, 0.15);
-
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.2);
     transition: all 0.3s ease;
 }
 
 .slider:hover {
-    transform: scaleY(1.15);
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
 }
 
-
-/* Chrome / Edge / Safari */
-
-.slider::-webkit-slider-runnable-track {
-    width: 100%;
-
-    height: 12px;
-
-    background:
-        linear-gradient(
-            to right,
-            #d48791,
-            #df9ca5,
-            #edd1d4
-        );
-
-    border-radius: 999px;
-}
-
-
-/* Firefox */
-
+/* Ensure track is visible */
+.slider::-webkit-slider-runnable-track,
 .slider::-moz-range-track {
     width: 100%;
-
-    height: 12px;
-
-    background:
-        linear-gradient(
-            to right,
-            #d48791,
-            #df9ca5,
-            #edd1d4
-        );
-
-    border-radius: 999px;
+    height: 25px;
+    background: linear-gradient(to right, #ff6b6b, #ff8787, #ffb8b8);
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
 }
 
-
-/* Slider thumb */
-
+/* Ensure thumb is properly styled */
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
-
-    width: 28px;
-    height: 28px;
-
-    background: #9f5965;
-
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, #ff4757, #ff6b6b);
     border-radius: 50%;
-
     cursor: pointer;
-
-    box-shadow:
-        0 3px 10px rgba(100, 50, 60, 0.25);
-
+    box-shadow: 0 2px 10px rgba(255, 71, 87, 0.3);
+    position: relative;
+    z-index: 10;
+    margin-top: -5px;
     border: 3px solid white;
-
-    margin-top: -8px;
-
-    transition: transform 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .slider::-webkit-slider-thumb:hover {
-    transform: scale(1.12);
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
 }
-
 
 .slider::-moz-range-thumb {
-    width: 28px;
-    height: 28px;
-
-    background: #9f5965;
-
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, #ff4757, #ff6b6b);
     border-radius: 50%;
-
     cursor: pointer;
-
-    box-shadow:
-        0 3px 10px rgba(100, 50, 60, 0.25);
-
+    box-shadow: 0 2px 10px rgba(255, 71, 87, 0.3);
+    position: relative;
+    z-index: 10;
     border: 3px solid white;
+    transition: all 0.2s ease;
 }
 
-
-/* ============================================
-   LOVE VALUE
-   ============================================ */
-
-#loveValue {
-    font-weight: 600;
-
-    color: var(--text-color);
-
-    font-size: 1.2em;
+.slider::-moz-range-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
 }
-
-.love-value-container {
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 5px;
-}
-
-
-/* Extra love message */
 
 #extraLove {
-    color: var(--text-color);
-
-    font-weight: 600;
-
-    animation:
-        bounce
-        0.7s
-        infinite
-        alternate;
-
+    color: #ff6b6b;
+    font-weight: bold;
+    animation: bounce 0.5s infinite alternate;
     display: block;
-
-    padding: 7px 14px;
-
-    border-radius: 999px;
-
-    background: rgba(201, 111, 123, 0.08);
-
+    padding: 5px 10px;
+    border-radius: 10px;
+    background: rgba(255, 107, 107, 0.1);
+    text-shadow: 0 2px 4px rgba(255, 71, 87, 0.2);
     transition: all 0.3s ease;
-
     margin-top: 5px;
 }
 
 #extraLove.super-love {
-    background: rgba(201, 111, 123, 0.14);
-
-    font-size: 1.1em;
-
+    background: rgba(255, 107, 107, 0.2);
+    font-size: 1.2em;
     padding: 8px 15px;
+    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.2);
+}
+
+#loveValue {
+    font-weight: bold;
+    color: #ff4757;
+    font-size: 1.3em;
+    transition: all 0.3s ease;
+}
+
+.love-value-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
 }
 
 @keyframes bounce {
-
     from {
         transform: scale(1);
     }
-
     to {
-        transform: scale(1.08);
+        transform: scale(1.2);
     }
 }
 
-
-/* ============================================
-   CELEBRATION
-   ============================================ */
-
-.celebration {
-    animation:
-        fadeIn
-        0.8s
-        ease;
+.hearts-explosion {
+    font-size: 2rem;
+    animation: explode 1s ease-out forwards;
+    margin-top: 30px;
 }
 
-.celebration-text {
-    font-size: 1.15rem;
-
-    color: #70434b;
-
-    font-weight: 400;
-
-    line-height: 1.8;
-
-    margin: 20px 0;
+@keyframes explode {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(var(--heart-explosion-size));
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
-#celebrationTitle {
-    font-family: 'Dancing Script', cursive;
-
-    font-size: 2.6rem;
-
-    color: var(--text-color);
-
+h1, h2 {
+    font-family: Arial, sans-serif;
     font-weight: 700;
 }
 
-@keyframes fadeIn {
+h1 {
+    color: #ff6b6b;
+    margin-bottom: 2rem;
+}
 
-    from {
-        opacity: 0;
+h2 {
+    color: #ff8787;
+}
 
-        transform: translateY(15px);
-    }
-
-    to {
-        opacity: 1;
-
-        transform: translateY(0);
-    }
+.super-love {
+    font-size: 1.5em;
+    color: #ff4757;
+    font-weight: bold;
+    transform: scale(1.2);
+    display: inline-block;
+    text-shadow: 2px 2px 4px rgba(255, 71, 87, 0.3);
 }
 
 
-/* ============================================
-   MUSIC BUTTON
-   ============================================ */
+.celebration-text {
+    font-size: 3em;
+    color: #ff4757;
+    font-weight: bold;
+    margin: 30px 0;
+    animation: bounce var(--bounce-speed) infinite alternate;
+    text-shadow: 2px 2px 4px rgba(255, 71, 87, 0.3);
+}
+
+@keyframes subtle-hint {
+    0% { opacity: 0.2; }
+    100% { opacity: 0.3; }
+}
 
 .music-controls {
     position: fixed;
-
     top: 20px;
     right: 20px;
-
     z-index: 1000;
 }
 
 .music-btn {
-    background: rgba(112, 67, 75, 0.9);
-
+    background: var(--primary-color);
     color: white;
-
     border: none;
-
-    padding: 9px 17px;
-
-    border-radius: 999px;
-
+    padding: 10px 20px;
+    border-radius: 20px;
     cursor: pointer;
-
-    font-family: 'Poppins', sans-serif;
-
-    font-size: 13px;
-
+    font-size: 16px;
     transition: all 0.3s ease;
-
-    box-shadow:
-        0 4px 12px rgba(80, 50, 55, 0.15);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .music-btn:hover {
-    transform: translateY(-2px);
-
-    background: #70434b;
-}
-
-
-/* ============================================
-   MOBILE
-   ============================================ */
-
-@media (max-width: 600px) {
-
-    .container {
-        width: 82%;
-
-        padding: 35px 22px;
-
-        border-radius: 24px;
-    }
-
-    h1 {
-        font-size: 2.4rem;
-    }
-
-    h2 {
-        font-size: 1.1rem;
-    }
-
-    .cute-btn {
-        font-size: 0.9rem;
-
-        padding: 11px 20px;
-    }
-
-    .music-controls {
-        top: 12px;
-        right: 12px;
-    }
-
-    .music-btn {
-        font-size: 11px;
-
-        padding: 7px 12px;
-    }
-
-    .secret-answer {
-        bottom: 10px;
-        right: 10px;
-    }
-}
-```
+    transform: scale(1.05);
+    background: var(--secondary-color);
+} 
