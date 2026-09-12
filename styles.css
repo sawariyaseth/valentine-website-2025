@@ -1,4 +1,6 @@
-/* CSS Variables - Will be updated by JavaScript */
+/* ============================================
+   CSS VARIABLES (updated by JavaScript from config)
+   ============================================ */
 :root {
     /* Colors */
     --background-color-1: #ffafbd;
@@ -36,6 +38,9 @@ body {
     overflow: visible !important;
 }
 
+/* ============================================
+   FLOATING BACKGROUND ELEMENTS
+   ============================================ */
 .floating-elements {
     position: fixed;
     width: 100%;
@@ -51,14 +56,13 @@ body {
 }
 
 @keyframes float {
-    0% {
-        transform: translateY(100vh) translateX(0);
-    }
-    100% {
-        transform: translateY(-100px) translateX(var(--float-distance));
-    }
+    0% { transform: translateY(100vh) translateX(0); }
+    100% { transform: translateY(-100px) translateX(var(--float-distance)); }
 }
 
+/* ============================================
+   BUTTONS
+   ============================================ */
 .cute-btn {
     background: var(--button-color);
     border: none;
@@ -68,7 +72,7 @@ body {
     color: white;
     font-size: 1.1rem;
     cursor: pointer;
-    transition: transform 0.3s, background 0.3s;
+    transition: transform 0.3s, background 0.3s, left 0.35s ease, top 0.35s ease;
 }
 
 .cute-btn:hover {
@@ -86,6 +90,7 @@ body {
     pointer-events: none;
 }
 
+/* Secret hint button, tucked away and barely noticeable */
 .secret-answer {
     position: fixed;
     bottom: 20px;
@@ -109,6 +114,14 @@ body {
     animation: none;
 }
 
+@keyframes subtle-hint {
+    0% { opacity: 0.2; }
+    100% { opacity: 0.3; }
+}
+
+/* ============================================
+   LOVE METER
+   ============================================ */
 .love-meter {
     position: relative;
     width: 100%;
@@ -146,7 +159,6 @@ body {
     box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
 }
 
-/* Ensure track is visible */
 .slider::-webkit-slider-runnable-track,
 .slider::-moz-range-track {
     width: 100%;
@@ -156,7 +168,6 @@ body {
     border: 2px solid rgba(255, 255, 255, 0.5);
 }
 
-/* Ensure thumb is properly styled */
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 35px;
@@ -229,32 +240,13 @@ body {
 }
 
 @keyframes bounce {
-    from {
-        transform: scale(1);
-    }
-    to {
-        transform: scale(1.2);
-    }
+    from { transform: scale(1); }
+    to { transform: scale(1.2); }
 }
 
-.hearts-explosion {
-    font-size: 2rem;
-    animation: explode 1s ease-out forwards;
-    margin-top: 30px;
-}
-
-@keyframes explode {
-    0% {
-        transform: scale(0);
-    }
-    50% {
-        transform: scale(var(--heart-explosion-size));
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
 h1, h2 {
     font-family: Arial, sans-serif;
     font-weight: 700;
@@ -278,6 +270,20 @@ h2 {
     text-shadow: 2px 2px 4px rgba(255, 71, 87, 0.3);
 }
 
+/* ============================================
+   CELEBRATION
+   ============================================ */
+.hearts-explosion {
+    font-size: 2rem;
+    animation: explode 1s ease-out forwards;
+    margin-top: 30px;
+}
+
+@keyframes explode {
+    0% { transform: scale(0); }
+    50% { transform: scale(var(--heart-explosion-size)); }
+    100% { transform: scale(1); }
+}
 
 .celebration-text {
     font-size: 3em;
@@ -288,11 +294,11 @@ h2 {
     text-shadow: 2px 2px 4px rgba(255, 71, 87, 0.3);
 }
 
-@keyframes subtle-hint {
-    0% { opacity: 0.2; }
-    100% { opacity: 0.3; }
-}
-
+/* ============================================
+   MUSIC PLAYER
+   Kept intentionally subtle so it never competes
+   with the questions for attention.
+   ============================================ */
 .music-controls {
     position: fixed;
     top: 20px;
@@ -301,18 +307,43 @@ h2 {
 }
 
 .music-btn {
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.35);
+    color: #b2222e;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    padding: 8px 16px;
     border-radius: 20px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 0.85rem;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .music-btn:hover {
+    background: rgba(255, 255, 255, 0.55);
     transform: scale(1.05);
-    background: var(--secondary-color);
-} 
+}
+
+/* ============================================
+   RESPONSIVE TWEAKS
+   ============================================ */
+@media (max-width: 480px) {
+    .container {
+        padding: 1.5rem 1.2rem;
+    }
+
+    .celebration-text {
+        font-size: 2.2em;
+    }
+
+    .music-controls {
+        top: 12px;
+        right: 12px;
+    }
+
+    .music-btn {
+        font-size: 0.75rem;
+        padding: 6px 12px;
+    }
+}
