@@ -1,67 +1,349 @@
-const CONFIG = {
-    valentineName: "Sanika",
+/* ============================================
+   CSS VARIABLES (updated by JavaScript from config)
+   ============================================ */
+:root {
+    /* Colors */
+    --background-color-1: #ffafbd;
+    --background-color-2: #ffc3a0;
+    --button-color: #ff6b6b;
+    --button-hover: #ff8787;
+    --text-color: #ff4757;
 
-    pageTitle: "so... do you like me? 👀",
+    /* Animations */
+    --float-duration: 15s;
+    --float-distance: 50px;
+    --bounce-speed: 0.5s;
+    --heart-explosion-size: 1.5;
+}
 
-    floatingEmojis: {
-        hearts: ['♡', '✦', '♥', '⋆', '❥'],
-        bears: ['🧸', '🐻']
-    },
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, var(--background-color-1), var(--background-color-2));
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
 
-    questions: {
-        first: {
-            text: "Be honest... have I started to become a little more than just a friend to you? 👀",
-            yesBtn: "Maybe... yes",
-            noBtn: "Not really",
-            secretAnswer: "I knew there was something there 👀"
-        },
-        second: {
-            text: "Okay, but how much do you like me?",
-            startText: "Let me guess...",
-            nextBtn: "Okay, next"
-        },
-        third: {
-            text: "So... should we finally meet and see where this goes?",
-            yesBtn: "Absolutely",
-            noBtn: "Maybe later"
-        }
-    },
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 600px;
+    margin: 20px;
+    overflow: visible !important;
+}
 
-    loveMessages: {
-        extreme: "Okay... I think you've made your answer pretty obvious 👀",
-        high: "That's definitely more than a little crush.",
-        normal: "Hmm... I'll take that as a good sign."
-    },
+/* ============================================
+   FLOATING BACKGROUND ELEMENTS
+   ============================================ */
+.floating-elements {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
 
-    celebration: {
-        title: "Well... looks like we have a date. ✦",
-        message: "Now all that's left is choosing the day. And yes, I'm already looking forward to it.",
-        emojis: "♡ ✦ 🧸"
-    },
+.heart, .bear {
+    position: absolute;
+    font-size: 2rem;
+    animation: float var(--float-duration) linear infinite;
+}
 
-    colors: {
-        backgroundStart: "#ffafbd",
-        backgroundEnd: "#ffc3a0",
-        buttonBackground: "#ff6b6b",
-        buttonHover: "#ff8787",
-        textColor: "#ff4757"
-    },
+@keyframes float {
+    0% { transform: translateY(100vh) translateX(0); }
+    100% { transform: translateY(-100px) translateX(var(--float-distance)); }
+}
 
-    animations: {
-        floatDuration: "15s",
-        floatDistance: "50px",
-        bounceSpeed: "0.5s",
-        heartExplosionSize: 1.5
-    },
+/* ============================================
+   BUTTONS
+   ============================================ */
+.cute-btn {
+    background: var(--button-color);
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 20px;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.3s, background 0.3s, left 0.35s ease, top 0.35s ease;
+}
 
-    music: {
-        enabled: true,
-        autoplay: true,
-        musicUrl: "https://res.cloudinary.com/dncywqfpb/video/upload/v1738399057/music_qrhjvy.mp3",
-        startText: "♪ Play something nice",
-        stopText: "Stop music",
-        volume: 0.5
+.cute-btn:hover {
+    transform: scale(1.1);
+    background: var(--button-hover);
+}
+
+.hidden {
+    display: none;
+}
+
+.disabled-btn {
+    opacity: 0.7;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Secret hint button, tucked away and barely noticeable */
+.secret-answer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    margin-top: 0;
+    opacity: 0.2;
+    transition: opacity 0.3s;
+    transform: scale(0.7);
+    z-index: 2;
+    animation: subtle-hint 2s infinite alternate;
+    animation-delay: 5s;
+}
+
+.secret-answer .cute-btn {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+}
+
+.secret-answer:hover {
+    opacity: 1;
+    animation: none;
+}
+
+@keyframes subtle-hint {
+    0% { opacity: 0.2; }
+    100% { opacity: 0.3; }
+}
+
+/* ============================================
+   LOVE METER
+   ============================================ */
+.love-meter {
+    position: relative;
+    width: 100%;
+    margin: 20px auto;
+    overflow: visible;
+    padding: 10px 0;
+}
+
+.love-meter p {
+    font-size: 1.2em;
+    margin: 15px 0;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.slider {
+    width: 100%;
+    height: 25px;
+    background: linear-gradient(to right, #ff6b6b, #ff8787, #ffb8b8);
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+    position: relative;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.2);
+    transition: all 0.3s ease;
+}
+
+.slider:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+}
+
+.slider::-webkit-slider-runnable-track,
+.slider::-moz-range-track {
+    width: 100%;
+    height: 25px;
+    background: linear-gradient(to right, #ff6b6b, #ff8787, #ffb8b8);
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, #ff4757, #ff6b6b);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(255, 71, 87, 0.3);
+    position: relative;
+    z-index: 10;
+    margin-top: -5px;
+    border: 3px solid white;
+    transition: all 0.2s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+}
+
+.slider::-moz-range-thumb {
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, #ff4757, #ff6b6b);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(255, 71, 87, 0.3);
+    position: relative;
+    z-index: 10;
+    border: 3px solid white;
+    transition: all 0.2s ease;
+}
+
+.slider::-moz-range-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+}
+
+#extraLove {
+    color: #ff6b6b;
+    font-weight: bold;
+    animation: bounce 0.5s infinite alternate;
+    display: block;
+    padding: 5px 10px;
+    border-radius: 10px;
+    background: rgba(255, 107, 107, 0.1);
+    text-shadow: 0 2px 4px rgba(255, 71, 87, 0.2);
+    transition: all 0.3s ease;
+    margin-top: 5px;
+}
+
+#extraLove.super-love {
+    background: rgba(255, 107, 107, 0.2);
+    font-size: 1.2em;
+    padding: 8px 15px;
+    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.2);
+}
+
+#loveValue {
+    font-weight: bold;
+    color: #ff4757;
+    font-size: 1.3em;
+    transition: all 0.3s ease;
+}
+
+.love-value-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+@keyframes bounce {
+    from { transform: scale(1); }
+    to { transform: scale(1.2); }
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+h1, h2 {
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+}
+
+h1 {
+    color: #ff6b6b;
+    margin-bottom: 2rem;
+}
+
+h2 {
+    color: #ff8787;
+}
+
+.super-love {
+    font-size: 1.5em;
+    color: #ff4757;
+    font-weight: bold;
+    transform: scale(1.2);
+    display: inline-block;
+    text-shadow: 2px 2px 4px rgba(255, 71, 87, 0.3);
+}
+
+/* ============================================
+   CELEBRATION
+   ============================================ */
+.hearts-explosion {
+    font-size: 2rem;
+    animation: explode 1s ease-out forwards;
+    margin-top: 30px;
+}
+
+@keyframes explode {
+    0% { transform: scale(0); }
+    50% { transform: scale(var(--heart-explosion-size)); }
+    100% { transform: scale(1); }
+}
+
+.celebration-text {
+    font-size: 3em;
+    color: #ff4757;
+    font-weight: bold;
+    margin: 30px 0;
+    animation: bounce var(--bounce-speed) infinite alternate;
+    text-shadow: 2px 2px 4px rgba(255, 71, 87, 0.3);
+}
+
+/* ============================================
+   MUSIC PLAYER
+   Kept intentionally subtle so it never competes
+   with the questions for attention.
+   ============================================ */
+.music-controls {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.music-btn {
+    background: rgba(255, 255, 255, 0.35);
+    color: #b2222e;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.music-btn:hover {
+    background: rgba(255, 255, 255, 0.55);
+    transform: scale(1.05);
+}
+
+/* ============================================
+   RESPONSIVE TWEAKS
+   ============================================ */
+@media (max-width: 480px) {
+    .container {
+        padding: 1.5rem 1.2rem;
     }
-};
 
-window.VALENTINE_CONFIG = CONFIG;
+    .celebration-text {
+        font-size: 2.2em;
+    }
+
+    .music-controls {
+        top: 12px;
+        right: 12px;
+    }
+
+    .music-btn {
+        font-size: 0.75rem;
+        padding: 6px 12px;
+    }
+}
